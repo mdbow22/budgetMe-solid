@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.landing-hero {
+    min-height: 60vh;
+}
+
+.hero-image {
+    max-height: 498px;
+}
+
+.hero-image img {
+    max-height: 498px;
+}
