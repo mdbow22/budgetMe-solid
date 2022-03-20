@@ -14,3 +14,10 @@
 .hero-image img {
     max-height: 498px;
 }
+
+@layer components {
+
+    .active {
+        @apply border-violet-600 border-b-2;
+    }
+}
