@@ -1,7 +1,22 @@
-import { Component } from 'solid-js';
+import { Component, createEffect, createSignal } from 'solid-js';
 import undraw_investment from '../undraw_investment.svg';
 
 const Hero: Component = () => {
+
+    const [data, setData] = createSignal();
+
+    createEffect(() => {
+        fetch('/api/user/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                username: "mdthompson",
+                password: 'password',
+            }),
+        }).then(res => {
+            console.log(res);
+        })
+    })
 
     return (
         <div className='w-100 border landing-hero flex md:flex-row flex-col justify-center md:justify-between items-center py-3 bg-gradient-to-bl from-green-50 shadow-lg'>
