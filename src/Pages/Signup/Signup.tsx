@@ -31,30 +31,20 @@ const Signup: Component = () => {
         e.preventDefault();
         if(validEmail(form.email) && validPW(form.password)) {
             try {
-                const response = await fetch('/api/user/create', {
-                    method: 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body: JSON.stringify(form),
-                });
-                
-                let data;
-                if(response.status === 201) {
-                    data = await response.json();
-    
-                    Auth.setToken(data.token);
-                    navigate('/dashboard');
-                } else {
-                    data = await response.json();
 
-                    if(data[0].path === 'username') {
-                        setInvalidUsername(true);
-                    } else if (data[0].path === 'email') {
-                        setInvalidEmail(true);
-                        console.log(data.path);
-                    }
-                }
+                const data = await API.post('/user/create', form);
+    
+                Auth.setToken(data.token);
+                navigate('/dashboard');
+
             } catch (err) {
-                console.log(err);
+                if(err[0].path === 'username') {
+                    setInvalidUsername(true);
+                }
+
+                if(err[0].path === 'email') {
+                    setInvalidEmail(true);
+                }
             }
             
             
