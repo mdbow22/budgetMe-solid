@@ -3,6 +3,7 @@ import { createStore } from 'solid-js/store';
 import { useNavigate } from "solid-app-router";
 import { Link } from "solid-app-router";
 import { validEmail, validPW } from "../../utils/validation";
+import API from "../../utils/api";
 import Auth from "../../utils/auth";
 import TextInput from "../../Components/core/formInputs.tsx/TextInput";
 import SubmitBtn from "../../Components/core/formInputs.tsx/SubmitBtn";
@@ -40,7 +41,7 @@ const Signup: Component = () => {
                 if(response.status === 201) {
                     data = await response.json();
     
-                    Auth.login(data.token);
+                    Auth.setToken(data.token);
                     navigate('/dashboard');
                 } else {
                     data = await response.json();

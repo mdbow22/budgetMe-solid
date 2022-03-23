@@ -1,5 +1,5 @@
 const Auth = {
-    login: function(token) {
+    setToken: function(token) {
         localStorage.setItem('login_token',token);
     },
 }

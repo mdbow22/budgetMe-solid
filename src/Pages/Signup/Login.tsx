@@ -1,22 +1,48 @@
-import { Component, Show } from "solid-js";
+import { Component, createSignal, Show } from "solid-js";
 import { createStore } from 'solid-js/store';
 import { useNavigate } from "solid-app-router";
 import { Link } from "solid-app-router";
 import TextInput from "../../Components/core/formInputs.tsx/TextInput";
 import SubmitBtn from "../../Components/core/formInputs.tsx/SubmitBtn";
+import API from "../../utils/api";
+import Auth from "../../utils/auth";
 
 const Login: Component = () => {
+
+    const navigate = useNavigate();
+
+    const [loginFailed, setLoginFailed] = createSignal<boolean>(false);
+    const [errorMsg, setErrorMsg] = createSignal<string | null>(null);
 
     const [form, setForm] = createStore({
         username: '',
         password: '',
     });
 
-    const loginUser = (e) => {
+    const loginUser = async (e: any) => {
         e.preventDefault();
+        try {
+            if(form.username.length === 0 || form.password.length === 0) {
+                return;
+            }
+
+            const data = await API.post('/user/login', form);
+
+            Auth.setToken(data.token);
+            navigate('/dashboard');
+        } catch (err) {
+
+            if(err.message === 'invalid username/password') {
+                setErrorMsg('Invalid username or password');
+            } else {
+                setErrorMsg('Unable to login');
+            }
+
+            setLoginFailed(true);
+        }
     }
 
-    const updateForm = (field, e) => {
+    const updateForm = (field: any, e: any) => {
         setForm(field, e.target.value);
     }
 
@@ -24,6 +50,9 @@ const Login: Component = () => {
         <div className='mx-auto border max-w-lg mt-20 p-4 bg-gradient-to-bl from-green-50 shadow-lg'>
             <form onSubmit={loginUser}>
                 <h2 className="text-3xl text-green-600 font-bold">Login</h2>
+                <Show when={loginFailed()}>
+                    <p className='text-sm mt-2 -mb-3 text-red-500'>{errorMsg}</p>
+                </Show>
                 <div className='mt-3'>
                     <TextInput
                         required
@@ -43,6 +72,7 @@ const Login: Component = () => {
                         labelText='Password'
                         type='password'
                         />
+                    
                     <div className='flex justify-between items-center mt-5'>
                         <SubmitBtn text="Login" />
                         <p className='text-sm'>Not a user yet? 
