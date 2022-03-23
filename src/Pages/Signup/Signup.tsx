@@ -1,6 +1,7 @@
 import { Component, createSignal, createEffect, Show } from "solid-js";
 import { createStore } from 'solid-js/store';
 import { useNavigate } from "solid-app-router";
+import { Link } from "solid-app-router";
 import { validEmail, validPW } from "../../utils/validation";
 import Auth from "../../utils/auth";
 import TextInput from "../../Components/core/formInputs.tsx/TextInput";
@@ -102,7 +103,9 @@ const Signup: Component = () => {
                     <p className='text-xs mb-2 -mt-1'>8 characters with an uppercase, lowercase, number, and symbol</p>
                     <div className='flex justify-between mt-5'>
                         <SubmitBtn />
+                        <Link href='/login'>
                         <button type='button' className='text-violet-600'>Login Instead</button>
+                        </Link>
                     </div>
                 </div>
                 

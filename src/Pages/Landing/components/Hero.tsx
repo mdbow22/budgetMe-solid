@@ -15,7 +15,11 @@ const Hero: Component = () => {
                         </Link>
                     </div>
                     
-                    <div className='text-center pt-3'>Already a member? <span className='text-violet-600'>Login Here</span></div>
+                    <div className='text-center pt-3'>Already a member? 
+                        <Link href='/login'>
+                            <span className='text-violet-600'>Login Here</span>
+                        </Link>
+                    </div>
                 </div>
             </div>
             
