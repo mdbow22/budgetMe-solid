@@ -1,12 +1,30 @@
 import { Link, NavLink } from "solid-app-router";
-import { Component } from "solid-js";
+import { Component, createEffect, createSignal, onMount, useContext } from "solid-js";
+import { useUser } from "../../utils/UserContext";
+import { decode, checkExpiration, getToken } from "../../utils/auth";
 
 const Navbar: Component = () => {
+
+    const userStore = useUser();
+    const [loggedIn, setLoggedIn] = createSignal(false);
+
+    onMount(() => {
+        const user = decode();
+        if(checkExpiration(user)) {
+            userStore[0].setUser(user);
+            setLoggedIn(true);
+        }
+    })
+
+    createEffect(() => {
+        console.log(userStore[0].user());
+    })
+
     return (
         
         <nav className="bg-gradient-to-bl from-green-100/80 shadow-lg text-green-600">
             <div className="py-3 px-5 flex flex-col md:flex-row items-center">
-                <Link href='/'>
+                <Link href={loggedIn() ? '/dashboard' : '/'}>
                     <h1 className="text-4xl md:pr-5 text-center font-bold" style='font-family: Piazzolla'>BudgetMe</h1>
                 </Link>
                 

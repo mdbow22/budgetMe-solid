@@ -19,6 +19,7 @@ export const getToken = () => {
 
 export const decode = () => {
     const token = getToken();
+    console.log(token);
     if(!token) {
         return;
     }
@@ -29,8 +30,10 @@ export const decode = () => {
 }
 
 export const checkExpiration = (decoded: UserType) => {
-    const expirationDate = decoded.iat * 1000;
+    const expirationDate = (decoded.iat * 1000) + 86400000;
+    console.log('jwt: ', expirationDate);
     const now = Date.now();
+    console.log('now: ', now)
     if(expirationDate < now || decoded === undefined) {
         return false;
     }
