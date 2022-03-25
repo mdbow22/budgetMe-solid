@@ -4,7 +4,7 @@ import { useNavigate } from "solid-app-router";
 import { Link } from "solid-app-router";
 import { validEmail, validPW } from "../../utils/validation";
 import API from "../../utils/api";
-import Auth from "../../utils/auth";
+import { setToken } from "../../utils/auth";
 import TextInput from "../../Components/core/formInputs.tsx/TextInput";
 import SubmitBtn from "../../Components/core/formInputs.tsx/SubmitBtn";
 
@@ -34,7 +34,7 @@ const Signup: Component = () => {
 
                 const data = await API.post('/user/create', form);
     
-                Auth.setToken(data.token);
+                setToken(data.token);
                 navigate('/dashboard');
 
             } catch (err) {

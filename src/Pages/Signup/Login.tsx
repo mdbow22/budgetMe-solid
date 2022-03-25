@@ -5,7 +5,7 @@ import { Link } from "solid-app-router";
 import TextInput from "../../Components/core/formInputs.tsx/TextInput";
 import SubmitBtn from "../../Components/core/formInputs.tsx/SubmitBtn";
 import API from "../../utils/api";
-import Auth from "../../utils/auth";
+import { setToken } from "../../utils/auth";
 
 const Login: Component = () => {
 
@@ -28,7 +28,7 @@ const Login: Component = () => {
 
             const data = await API.post('/user/login', form);
 
-            Auth.setToken(data.token);
+            setToken(data.token);
             navigate('/dashboard');
         } catch (err) {
 

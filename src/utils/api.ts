@@ -15,6 +15,22 @@ const API = {
 
         throw data;
     },
+    get: async function(path, token) {
+        const response = await fetch(`api${path}`, {
+            headers: {
+                'Content-Type': 'application/json',
+                authorization: `Bearer ${token}`
+            }
+        });
+
+        const data = response.json();
+
+        if(response.ok) {
+            return data;
+        }
+
+        throw data;
+    }
 }
 
 export default API;
