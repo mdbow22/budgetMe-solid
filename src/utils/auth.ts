@@ -7,6 +7,8 @@ export type UserType = {
     iat: number;
 }
 
+export type Decode = (token?: string) => UserType;
+
 export const setToken = (token: string) => {
     localStorage.setItem('login_token',token);
 }
@@ -17,14 +19,14 @@ export const getToken = () => {
     return token;
 }
 
-export const decode = () => {
-    const token = getToken();
+export const decode: Decode = (token: any) => {
+    const userToken = token ?? getToken();
     console.log(token);
-    if(!token) {
+    if(!userToken) {
         return;
     }
 
-    const user: UserType = jwt_decode(token);
+    const user: UserType = jwt_decode(userToken);
 
     return user;
 }

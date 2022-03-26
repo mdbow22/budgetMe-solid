@@ -5,11 +5,13 @@ import { Link } from "solid-app-router";
 import TextInput from "../../Components/core/formInputs.tsx/TextInput";
 import SubmitBtn from "../../Components/core/formInputs.tsx/SubmitBtn";
 import API from "../../utils/api";
-import { setToken } from "../../utils/auth";
+import { setToken, decode } from "../../utils/auth";
+import { useUser } from "../../utils/UserContext";
 
 const Login: Component = () => {
 
     const navigate = useNavigate();
+    const userState = useUser();
 
     const [loginFailed, setLoginFailed] = createSignal<boolean>(false);
     const [errorMsg, setErrorMsg] = createSignal<string | null>(null);
@@ -29,6 +31,7 @@ const Login: Component = () => {
             const data = await API.post('/user/login', form);
 
             setToken(data.token);
+            userState.setUser(decode(data.token));
             navigate('/dashboard');
         } catch (err) {
 
