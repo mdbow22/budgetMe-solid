@@ -26,4 +26,12 @@ body {
     .active {
         @apply border-violet-600 border-b-2;
     }
+
+    .nav-link {
+        @apply mb-3 md:my-0 md:border-0 border-b md:text-left text-center border-slate-300 w-full
+    }
+
+    .login-popup {
+        @apply absolute top-11 right-0 bg-white border shadow-md w-28
+    }
 }

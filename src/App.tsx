@@ -1,6 +1,6 @@
 import { Route, Routes } from 'solid-app-router';
 import type { Component } from 'solid-js';
-import Navbar from './Components/core/Navbar';
+import Navbar from './Components/Navbar';
 import Landing from './Pages/Landing/Landing';
 import Login from './Pages/Signup/Login';
 import Signup from './Pages/Signup/Signup';
