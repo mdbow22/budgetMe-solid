@@ -40,10 +40,13 @@ export const UserProvider = (props) => {
     const [loggedIn, setLoggedIn] = createSignal<boolean>(false);
 
     createEffect(() => {
+        console.log('triggered');
         if(user() && checkExpiration(user())) {
             console.log(user());
             console.log(checkExpiration(user()));
             setLoggedIn(true);
+        } else {
+            setLoggedIn(false);
         }
     })
 

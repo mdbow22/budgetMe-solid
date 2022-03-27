@@ -32,7 +32,7 @@ const Login: Component = () => {
 
             setToken(data.token);
             userState.setUser(decode(data.token));
-            navigate('/dashboard');
+            navigate('/user/dashboard');
         } catch (err) {
 
             if(err.message === 'invalid username/password') {

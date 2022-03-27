@@ -35,7 +35,7 @@ const Signup: Component = () => {
                 const data = await API.post('/user/create', form);
     
                 setToken(data.token);
-                navigate('/dashboard');
+                navigate('/user/dashboard');
 
             } catch (err) {
                 if(err[0].path === 'username') {

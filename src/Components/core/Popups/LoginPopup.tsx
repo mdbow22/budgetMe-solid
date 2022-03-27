@@ -1,10 +1,18 @@
 import { Component, Show, createSignal } from 'solid-js';
+import { Link } from 'solid-app-router';
 import { useUser } from '../../../utils/UserContext';
+import { removeToken } from '../../../utils/auth';
 
 const LoginPopup: Component = () => {
 
     const userStore = useUser();
     const [showMenu, setShowMenu] = createSignal(false);
+
+    const logout = () => {
+        setShowMenu(false);
+        userStore.setUser(undefined);
+        removeToken();
+    }
 
     return (
         <div className='relative'>
@@ -14,14 +22,26 @@ const LoginPopup: Component = () => {
                 </svg>
             </button>
             <div className={showMenu() ? 'login-popup' : 'login-popup hidden'}>
-                <Show when={userStore.loggedIn} fallback={
+                <Show when={userStore.loggedIn()} fallback={
                     <ul>
-                        <li className='px-4 py-2 border-b-2 hover:bg-green-50'>Login</li>
-                        <li className='px-4 py-2 hover:bg-green-50'>Sign Up</li>
+                        <li className='px-4 py-2 border-b-2 hover:bg-green-50'>
+                            <Link href='/login' onClick={() => setShowMenu(false)}>
+                                Login
+                            </Link>
+                        </li>
+                        <li className='px-4 py-2 hover:bg-green-50'>
+                            <Link href='/signup' onClick={() => setShowMenu(false)}>    
+                                Sign Up
+                            </Link>
+                        </li>
                     </ul>
                 }>
                     <ul>
-                        <li className='px-4 py-2 hover:text-purple-500'>Logout</li>
+                        <li className='px-4 py-2 hover:text-purple-500'>
+                            <Link href='/' onClick={logout}>
+                                Logout
+                            </Link>
+                        </li>
                     </ul>
                 </Show>
             </div>
