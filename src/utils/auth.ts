@@ -1,4 +1,5 @@
 import jwt_decode from 'jwt-decode';
+import { useUser } from './UserContext';
 
 export type UserType = {
     username: string;
@@ -21,7 +22,6 @@ export const getToken = () => {
 
 export const decode: Decode = (token: any) => {
     const userToken = token ?? getToken();
-    console.log(token);
     if(!userToken) {
         return;
     }
@@ -33,12 +33,14 @@ export const decode: Decode = (token: any) => {
 
 export const checkExpiration = (decoded: UserType) => {
     const expirationDate = (decoded.iat * 1000) + 86400000;
-    console.log('jwt: ', expirationDate);
     const now = Date.now();
-    console.log('now: ', now)
     if(expirationDate < now || decoded === undefined) {
         return false;
     }
 
     return true;
+}
+
+export const removeToken = () => {
+    localStorage.removeItem('login_token');
 }
