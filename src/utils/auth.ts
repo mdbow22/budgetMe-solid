@@ -20,7 +20,7 @@ export const getToken = () => {
     return token;
 }
 
-export const decode: Decode = (token: any) => {
+export const decode: Decode = (token: string) => {
     const userToken = token ?? getToken();
     if(!userToken) {
         return;

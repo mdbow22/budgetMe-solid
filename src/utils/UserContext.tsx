@@ -6,16 +6,11 @@ import { createStore } from "solid-js/store";
 
 export type ProviderProps = {
         user: Accessor<UserType> | undefined;
-        setUser: any;
+        setUser: <U extends UserType>(value?: (U extends Function ? never : U) | ((prev?: UserType) => U)) => U;
         accounts: Resource<any>;
-        refetchAccounts: any;
+        refetchAccounts: (info?: unknown) => void;
         loggedIn: Accessor<boolean>;
 }
-
-// export type UserContextType = {
-//     id: symbol;
-//     Provider: (props: ProviderProps) => any;
-// }
 
 const UserContext = createContext<ProviderProps>();
 
@@ -58,16 +53,6 @@ export const UserProvider = (props) => {
         loggedIn,
     }
 
-    // const userStore = [
-    //     {
-    //         user: user,
-    //         setUser: setUser,
-    //     },
-    //     {
-    //         accounts,
-    //         refetchAccounts,
-    //     }
-    // ]
     return (
         <>
         <UserContext.Provider value={userStore}>

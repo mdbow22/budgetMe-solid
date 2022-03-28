@@ -1,6 +1,6 @@
 
 const API = {
-    post: async function(path, body) {
+    post: async function(path: string, body: object) {
         const response = await fetch(`api${path}`, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -15,7 +15,7 @@ const API = {
 
         throw data;
     },
-    get: async function(path, token) {
+    get: async function(path: string, token: string) {
         const response = await fetch(`api${path}`, {
             headers: {
                 'Content-Type': 'application/json',

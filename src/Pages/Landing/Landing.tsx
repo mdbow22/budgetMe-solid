@@ -11,7 +11,7 @@ const Landing: Component = () => {
 
     createEffect(() => {
         if(userStore.loggedIn()) {
-            navigate('/dashboard');
+            navigate('/user/dashboard');
         }
     })
     

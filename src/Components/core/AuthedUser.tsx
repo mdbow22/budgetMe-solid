@@ -1,6 +1,12 @@
-import { Component, Show, createEffect } from 'solid-js';
+import { Component, Show, createEffect, Accessor } from 'solid-js';
 import { Outlet, useNavigate } from 'solid-app-router';
 import { useUser } from '../../utils/UserContext';
+import Sidebar from '../Sidebar';
+
+type AuthedUserType = {
+    showMenu: Accessor<boolean>;
+    setShowMenu: any;
+}
 
 const Forbidden: Component = () => {
     return (
@@ -10,10 +16,12 @@ const Forbidden: Component = () => {
     )
 }
 
-const AuthedUser: Component = () => {
+const AuthedUser: Component<AuthedUserType> = (props) => {
 
     const { loggedIn } = useUser();
     const navigate = useNavigate();
+
+    
 
     createEffect(() => {
         if(!loggedIn()) {
@@ -22,8 +30,12 @@ const AuthedUser: Component = () => {
     })
 
     return (
+        
         <Show when={loggedIn()} fallback={<Forbidden />}>
-            <Outlet />    
+            <div className='h-full'>
+                <Sidebar showMenu={props.showMenu} setShowMenu={props.setShowMenu} />
+                <Outlet /> 
+            </div>
         </Show>
     )
 }
