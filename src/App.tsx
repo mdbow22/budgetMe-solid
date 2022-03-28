@@ -26,8 +26,6 @@ const App: Component = () => {
             <Route path='/signup' element={<Signup />} />
             <Route path='/login' element={<Login />} />
             <Route path='/user' element={<AuthedUser showMenu={showMenu} setShowMenu={setShowMenu} />} >
-              {/*Where Dashboard and Accounts links will go*/}
-              
               <Route path='/dashboard' element={<Dashboard />} />
             </Route>
         </Routes>

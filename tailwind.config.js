@@ -5,7 +5,16 @@ module.exports = {
   ],
   darkMode: 'class',
   theme: {
-    extend: {},
+    
+    extend: {
+      minWidth: {
+        64: '16rem',
+        68: '17rem',
+      },
+      maxWidth: {
+        68: '16rem',
+      }
+    },
   },
   plugins: [],
 };

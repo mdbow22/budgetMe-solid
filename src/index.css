@@ -22,7 +22,8 @@ body {
 }
 
 .sidebar {
-    transform: translateX(-13.25rem);
+    transform: translateX(-14.25rem);
+    z-index: 999;
     transition: all 250ms ease-in-out;
 }
 

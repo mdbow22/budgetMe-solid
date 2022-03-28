@@ -15,7 +15,7 @@ const Navbar: Component<NavbarType> = (props) => {
 
     return (
         
-        <nav className="bg-green-50 shadow-lg text-green-600">
+        <nav className="bg-green-50 shadow-lg text-green-700">
             <div className="py-3 pl-2 pr-5 flex items-center">
                 <div className='flex items-center gap-3'>
                     <button className='pt-2' type='button' onClick={() => props.setShowMenu((prev: boolean) => !prev)}

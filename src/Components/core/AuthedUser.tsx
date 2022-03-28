@@ -32,7 +32,7 @@ const AuthedUser: Component<AuthedUserType> = (props) => {
     return (
         
         <Show when={loggedIn()} fallback={<Forbidden />}>
-            <div className='h-full'>
+            <div className='min-h-screen border md:flex'>
                 <Sidebar showMenu={props.showMenu} setShowMenu={props.setShowMenu} />
                 <Outlet /> 
             </div>
